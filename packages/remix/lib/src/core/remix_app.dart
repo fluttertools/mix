@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart' as m;
 import 'package:flutter/widgets.dart';
 
+import '../components/toast/toast.dart';
 import 'theme/remix_theme.dart';
 
 //ignore: avoid-unnecessary-stateful-widgets
@@ -123,13 +124,15 @@ class _RemixAppState extends State<RemixApp> {
     return RemixTheme(
       theme: widget.theme,
       darkTheme: widget.darkTheme ?? widget.theme,
-      child: widget.builder != null
-          ? Builder(
-              builder: (BuildContext context) {
-                return widget.builder!(context, child);
-              },
-            )
-          : (child ?? const SizedBox.shrink()),
+      child: ToastLayer(
+        child: widget.builder != null
+            ? Builder(
+                builder: (BuildContext context) {
+                  return widget.builder!(context, child);
+                },
+              )
+            : (child ?? const SizedBox.shrink()),
+      ),
     );
   }
 
