@@ -88,18 +88,21 @@ class _InteractiveStateBuilderState extends State<InteractiveMixStateWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return FocusableActionDetector(
-      enabled: widget.enabled,
-      focusNode: widget.focusNode,
-      autofocus: widget.autofocus,
-      shortcuts: widget.shortcuts,
-      actions: widget.actions,
-      onShowFocusHighlight: _onShowFocusHighlight,
-      onShowHoverHighlight: _onShowHoverHighlight,
-      onFocusChange: widget.onFocusChange,
-      mouseCursor: widget.mouseCursor,
-      includeFocusSemantics: false,
-      child: widget.child,
+    return ExcludeFocus(
+      excluding: !widget.canRequestFocus,
+      child: FocusableActionDetector(
+        enabled: widget.enabled,
+        focusNode: widget.focusNode,
+        autofocus: widget.autofocus,
+        shortcuts: widget.shortcuts,
+        actions: widget.actions,
+        onShowFocusHighlight: _onShowFocusHighlight,
+        onShowHoverHighlight: _onShowHoverHighlight,
+        onFocusChange: widget.onFocusChange,
+        mouseCursor: widget.mouseCursor,
+        includeFocusSemantics: false,
+        child: widget.child,
+      ),
     );
   }
 }
