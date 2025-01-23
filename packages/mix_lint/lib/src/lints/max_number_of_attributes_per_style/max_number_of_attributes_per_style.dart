@@ -1,11 +1,11 @@
 import 'package:analyzer/error/error.dart';
 import 'package:analyzer/error/listener.dart';
 import 'package:custom_lint_builder/custom_lint_builder.dart';
-import 'max_number_of_attributes_per_style_parameters.dart';
-import '../../utils/extensions/lint_rule_node_registry.dart';
-import '../../utils/type_checker.dart';
 
+import '../../utils/extensions/lint_rule_node_registry.dart';
 import '../../utils/rule_config.dart';
+import '../../utils/type_checker.dart';
+import 'max_number_of_attributes_per_style_parameters.dart';
 
 class MaxNumberOfAttributesPerStyle extends DartLintRule {
   final MaxNumberOfAttributesPerStyleParameters parameters;
@@ -38,7 +38,7 @@ class MaxNumberOfAttributesPerStyle extends DartLintRule {
       styleChecker,
       (node) {
         if (node.argumentList.arguments.length > parameters.maxNumber) {
-          reporter.reportErrorForNode(code, node);
+          reporter.atNode(node, code);
         }
       },
     );
@@ -47,7 +47,7 @@ class MaxNumberOfAttributesPerStyle extends DartLintRule {
       variantAttributeChecker,
       (node) {
         if (node.argumentList.arguments.length > parameters.maxNumber) {
-          reporter.reportErrorForNode(code, node);
+          reporter.atNode(node, code);
         }
       },
     );

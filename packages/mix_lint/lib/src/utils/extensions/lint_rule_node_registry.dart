@@ -2,6 +2,7 @@ import 'package:analyzer/dart/ast/ast.dart';
 import 'package:analyzer/error/error.dart';
 import 'package:analyzer/error/listener.dart';
 import 'package:custom_lint_builder/custom_lint_builder.dart';
+
 import 'instance_creation_expression.dart';
 
 extension LintRuleNodeRegistryExt on LintRuleNodeRegistry {
@@ -12,7 +13,9 @@ extension LintRuleNodeRegistryExt on LintRuleNodeRegistry {
     addInstanceCreationExpression((node) {
       final type = node.staticType;
       if (type == null || //
-          !checker.isAssignableFromType(type)) return;
+          !checker.isAssignableFromType(type)) {
+        return;
+      }
 
       listener(node);
     });
@@ -25,7 +28,9 @@ extension LintRuleNodeRegistryExt on LintRuleNodeRegistry {
     addFunctionExpressionInvocation((node) {
       final type = node.staticType;
       if (type == null || //
-          !checker.isAssignableFromType(type)) return;
+          !checker.isAssignableFromType(type)) {
+        return;
+      }
 
       listener(node);
     });
@@ -42,7 +47,7 @@ extension CustomLintContextExt on CustomLintContext {
     registry.addInstanceCreationExpressionFor(child, (node) {
       if (!node.isDecendentOf(parent)) return;
 
-      reporter.reportErrorForOffset(code, node.offset, node.length);
+      reporter.atNode(node, code);
     });
   }
 }

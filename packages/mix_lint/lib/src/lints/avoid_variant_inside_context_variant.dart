@@ -3,6 +3,7 @@ import 'package:analyzer/dart/ast/ast.dart';
 import 'package:analyzer/error/error.dart' hide LintCode;
 import 'package:analyzer/error/listener.dart';
 import 'package:custom_lint_builder/custom_lint_builder.dart';
+
 import '../utils/type_checker.dart';
 import '../utils/visitors.dart';
 
@@ -48,7 +49,7 @@ class AvoidVariantInsideContextVariant extends DartLintRule {
       if (types.isEmpty) return;
 
       for (final type in types) {
-        reporter.reportErrorForOffset(_code, type.offset, type.length);
+        reporter.atNode(type, _code);
       }
     });
   }
