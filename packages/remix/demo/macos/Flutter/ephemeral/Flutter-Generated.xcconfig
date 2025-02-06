@@ -1,12 +1,12 @@
 // This is a generated file; do not edit or check into version control.
 FLUTTER_ROOT=/Users/lucasoliveira/fvm/versions/stable
-FLUTTER_APPLICATION_PATH=/Users/lucasoliveira/Developer/Mix/PoCs/remix_toast/packages/mix/packages/remix/demo
+FLUTTER_APPLICATION_PATH=/Users/lucasoliveira/Developer/Mix/PoCs/remix_app_poc/packages/mix/packages/remix/demo
 COCOAPODS_PARALLEL_CODE_SIGN=true
-FLUTTER_TARGET=/Users/lucasoliveira/Developer/Mix/PoCs/remix_toast/packages/mix/packages/remix/demo/lib/main.dart
+FLUTTER_TARGET=/Users/lucasoliveira/Developer/Mix/PoCs/remix_app_poc/packages/mix/packages/remix/demo/lib/main.dart
 FLUTTER_BUILD_DIR=build
 FLUTTER_BUILD_NAME=1.0.0
 FLUTTER_BUILD_NUMBER=1
 DART_OBFUSCATION=false
 TRACK_WIDGET_CREATION=true
 TREE_SHAKE_ICONS=false
-PACKAGE_CONFIG=/Users/lucasoliveira/Developer/Mix/PoCs/remix_toast/packages/mix/packages/remix/demo/.dart_tool/package_config.json
+PACKAGE_CONFIG=/Users/lucasoliveira/Developer/Mix/PoCs/remix_app_poc/packages/mix/packages/remix/demo/.dart_tool/package_config.json

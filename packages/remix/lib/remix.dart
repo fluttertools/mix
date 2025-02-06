@@ -30,6 +30,7 @@ export 'src/components/chip/chip.dart';
 export 'src/components/dialog/dialog.dart';
 export 'src/components/divider/divider.dart';
 export 'src/components/dropdown_menu/dropdown_menu.dart';
+export 'src/components/header/header.dart';
 export 'src/components/icon_button/icon_button.dart';
 export 'src/components/menu_item/menu_item.dart';
 export 'src/components/progress/progress.dart';

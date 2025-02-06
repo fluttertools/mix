@@ -20,17 +20,18 @@ import 'package:demo/components/chip_use_case.dart' as _i9;
 import 'package:demo/components/dialog_use_case.dart' as _i10;
 import 'package:demo/components/divider_use_case.dart' as _i11;
 import 'package:demo/components/dropdown_menu.dart' as _i12;
-import 'package:demo/components/icon_button_use_case.dart' as _i13;
-import 'package:demo/components/menu_item_use_case.dart' as _i14;
-import 'package:demo/components/progress_use_case.dart' as _i15;
-import 'package:demo/components/radio_use_case.dart' as _i16;
-import 'package:demo/components/segmented_control_use_case.dart' as _i17;
-import 'package:demo/components/select.dart' as _i18;
-import 'package:demo/components/slider.dart' as _i19;
-import 'package:demo/components/spinner_use_case.dart' as _i20;
-import 'package:demo/components/switch_use_case.dart' as _i21;
-import 'package:demo/components/textfield_use_case.dart' as _i22;
-import 'package:demo/components/toast_use_case.dart' as _i23;
+import 'package:demo/components/header_use_case.dart' as _i13;
+import 'package:demo/components/icon_button_use_case.dart' as _i14;
+import 'package:demo/components/menu_item_use_case.dart' as _i15;
+import 'package:demo/components/progress_use_case.dart' as _i16;
+import 'package:demo/components/radio_use_case.dart' as _i17;
+import 'package:demo/components/segmented_control_use_case.dart' as _i18;
+import 'package:demo/components/select.dart' as _i19;
+import 'package:demo/components/slider.dart' as _i20;
+import 'package:demo/components/spinner_use_case.dart' as _i21;
+import 'package:demo/components/switch_use_case.dart' as _i22;
+import 'package:demo/components/textfield_use_case.dart' as _i23;
+import 'package:demo/components/toast_use_case.dart' as _i24;
 import 'package:widgetbook/widgetbook.dart' as _i1;
 
 final directories = <_i1.WidgetbookNode>[
@@ -115,80 +116,87 @@ final directories = <_i1.WidgetbookNode>[
         ),
       ),
       _i1.WidgetbookLeafComponent(
+        name: 'Header',
+        useCase: _i1.WidgetbookUseCase(
+          name: 'Header Component',
+          builder: _i13.buildCard,
+        ),
+      ),
+      _i1.WidgetbookLeafComponent(
         name: 'IconButton',
         useCase: _i1.WidgetbookUseCase(
           name: 'Button Component',
-          builder: _i13.buildButtonUseCase,
+          builder: _i14.buildButtonUseCase,
         ),
       ),
       _i1.WidgetbookLeafComponent(
         name: 'MenuItem',
         useCase: _i1.WidgetbookUseCase(
           name: 'Menu Item Component',
-          builder: _i14.buildButtonUseCase,
+          builder: _i15.buildButtonUseCase,
         ),
       ),
       _i1.WidgetbookLeafComponent(
         name: 'Progress',
         useCase: _i1.WidgetbookUseCase(
           name: 'Progress Component',
-          builder: _i15.buildProgressUseCase,
+          builder: _i16.buildProgressUseCase,
         ),
       ),
       _i1.WidgetbookLeafComponent(
         name: 'Radio',
         useCase: _i1.WidgetbookUseCase(
           name: 'Radio Component',
-          builder: _i16.buildRadioUseCase,
+          builder: _i17.buildRadioUseCase,
         ),
       ),
       _i1.WidgetbookLeafComponent(
         name: 'SegmentedControl',
         useCase: _i1.WidgetbookUseCase(
           name: 'SegmentedControl Component',
-          builder: _i17.buildAccordionUseCase,
+          builder: _i18.buildAccordionUseCase,
         ),
       ),
       _i1.WidgetbookLeafComponent(
         name: 'Select',
         useCase: _i1.WidgetbookUseCase(
           name: 'Select Component',
-          builder: _i18.buildSelect,
+          builder: _i19.buildSelect,
         ),
       ),
       _i1.WidgetbookLeafComponent(
         name: 'Slider',
         useCase: _i1.WidgetbookUseCase(
           name: 'Slider Component',
-          builder: _i19.buildButtonUseCase,
+          builder: _i20.buildButtonUseCase,
         ),
       ),
       _i1.WidgetbookLeafComponent(
         name: 'Spinner',
         useCase: _i1.WidgetbookUseCase(
           name: 'Spinner Component',
-          builder: _i20.buildSpinnerUseCase,
+          builder: _i21.buildSpinnerUseCase,
         ),
       ),
       _i1.WidgetbookLeafComponent(
         name: 'Switch',
         useCase: _i1.WidgetbookUseCase(
           name: 'Switch Component',
-          builder: _i21.buildSwitchUseCase,
+          builder: _i22.buildSwitchUseCase,
         ),
       ),
       _i1.WidgetbookLeafComponent(
         name: 'TextField',
         useCase: _i1.WidgetbookUseCase(
           name: 'TextField Component',
-          builder: _i22.buildButtonUseCase,
+          builder: _i23.buildButtonUseCase,
         ),
       ),
       _i1.WidgetbookLeafComponent(
         name: 'Toast',
         useCase: _i1.WidgetbookUseCase(
           name: 'Toast Component',
-          builder: _i23.buildButtonUseCase,
+          builder: _i24.buildButtonUseCase,
         ),
       ),
     ],

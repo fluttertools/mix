@@ -9,6 +9,7 @@ import '../../components/chip/chip.dart';
 import '../../components/dialog/dialog.dart';
 import '../../components/divider/divider.dart';
 import '../../components/dropdown_menu/dropdown_menu.dart';
+import '../../components/header/header.dart';
 import '../../components/icon_button/icon_button.dart';
 import '../../components/menu_item/menu_item.dart';
 import '../../components/progress/progress.dart';
@@ -33,6 +34,7 @@ class RemixComponentTheme {
   final DialogStyle dialog;
   final ChipStyle chip;
   final DividerStyle divider;
+  final HeaderStyle header;
   final IconButtonStyle iconButton;
   final MenuItemStyle menuItem;
   final ProgressStyle progress;
@@ -58,6 +60,7 @@ class RemixComponentTheme {
     required this.dialog,
     required this.chip,
     required this.divider,
+    required this.header,
     required this.iconButton,
     required this.menuItem,
     required this.progress,
@@ -85,6 +88,7 @@ class RemixComponentTheme {
       dialog: DialogStyle(),
       chip: ChipStyle(),
       divider: DividerStyle(),
+      header: HeaderStyle(),
       iconButton: IconButtonStyle(),
       menuItem: MenuItemStyle(),
       progress: ProgressStyle(),
@@ -113,6 +117,7 @@ class RemixComponentTheme {
       dialog: const DialogDarkStyle(),
       chip: const ChipDarkStyle(),
       divider: const DividerDarkStyle(),
+      header: const HeaderDarkStyle(),
       iconButton: const IconButtonDarkStyle(),
       menuItem: const MenuItemDarkStyle(),
       progress: const ProgressDarkStyle(),
@@ -140,6 +145,7 @@ class RemixComponentTheme {
     DialogStyle? dialog,
     ChipStyle? chip,
     DividerStyle? divider,
+    HeaderStyle? header,
     IconButtonStyle? iconButton,
     MenuItemStyle? menuItem,
     ProgressStyle? progress,
@@ -165,6 +171,7 @@ class RemixComponentTheme {
       dialog: dialog ?? this.dialog,
       chip: chip ?? this.chip,
       divider: divider ?? this.divider,
+      header: header ?? this.header,
       iconButton: iconButton ?? this.iconButton,
       menuItem: menuItem ?? this.menuItem,
       progress: progress ?? this.progress,
