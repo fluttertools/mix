@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 
+import '../on_tap_event_inherited.dart';
 import '../widget_state_controller.dart';
 
 class GestureMixStateWidget extends StatefulWidget {
@@ -86,12 +87,19 @@ class GestureMixStateWidget extends StatefulWidget {
 class _GestureMixStateWidgetState extends State<GestureMixStateWidget> {
   int _pressCount = 0;
   Timer? _timer;
+  OnTapEvent? _onTapEvent;
   late final MixWidgetStateController _controller;
 
   @override
   void initState() {
     super.initState();
     _controller = widget.controller ?? MixWidgetStateController();
+  }
+
+  void _restoreTapEvent() {
+    setState(() {
+      _onTapEvent = null;
+    });
   }
 
   void _onPanUpdate(DragUpdateDetails event) {
@@ -117,27 +125,44 @@ class _GestureMixStateWidgetState extends State<GestureMixStateWidget> {
   }
 
   void _onTapUp(TapUpDetails details) {
+    setState(() {
+      _onTapEvent = OnTapEvent.up;
+    });
     _controller.longPressed = false;
     widget.onTapUp?.call(details);
   }
 
+  void _onTapDown(TapDownDetails details) {
+    setState(() {
+      _onTapEvent = OnTapEvent.down;
+    });
+  }
+
   void _onTapCancel() {
     _controller.longPressed = false;
+    _controller.pressed = false;
+    _restoreTapEvent();
     widget.onTapCancel?.call();
   }
 
   void _onLongPressStart(LongPressStartDetails details) {
     _controller.longPressed = true;
+    _onTapEvent = OnTapEvent.down;
+    _controller.pressed = true;
     widget.onLongPressStart?.call(details);
   }
 
   void _onLongPressEnd(LongPressEndDetails details) {
     _controller.longPressed = false;
+    _controller.pressed = false;
+    _restoreTapEvent();
     widget.onLongPressEnd?.call(details);
   }
 
   void _onLongPressCancel() {
     _controller.longPressed = false;
+    _controller.pressed = false;
+    _restoreTapEvent();
     widget.onLongPressCancel?.call();
   }
 
@@ -153,6 +178,7 @@ class _GestureMixStateWidgetState extends State<GestureMixStateWidget> {
     void unpressCallback() {
       if (_controller.pressed && _pressCount == initialPressCount) {
         _controller.pressed = false;
+        _restoreTapEvent();
       }
     }
 
@@ -188,22 +214,27 @@ class _GestureMixStateWidgetState extends State<GestureMixStateWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTapUp: widget.onTap != null ? _onTapUp : null,
-      onTap: widget.onTap != null ? _onTap : null,
-      onTapCancel: widget.onTap != null ? _onTapCancel : null,
-      onLongPressCancel: widget.onLongPress != null ? _onLongPressCancel : null,
-      onLongPress: widget.onLongPress != null ? _onLongPress : null,
-      onLongPressStart: widget.onLongPress != null ? _onLongPressStart : null,
-      onLongPressEnd: widget.onLongPress != null ? _onLongPressEnd : null,
-      onPanDown: widget.onPanDown != null ? _onPanDown : null,
-      onPanStart: widget.onPanStart != null ? _onPanStart : null,
-      onPanUpdate: widget.onPanUpdate != null ? _onPanUpdate : null,
-      onPanEnd: widget.onPanEnd != null ? _onPanEnd : null,
-      onPanCancel: widget.onPanCancel != null ? _onPanCancel : null,
-      behavior: widget.hitTestBehavior,
-      excludeFromSemantics: widget.excludeFromSemantics,
-      child: widget.child,
+    return OnTapEventProvider(
+      _onTapEvent,
+      child: GestureDetector(
+        onTapDown: widget.onTap != null ? _onTapDown : null,
+        onTapUp: widget.onTap != null ? _onTapUp : null,
+        onTap: widget.onTap != null ? _onTap : null,
+        onTapCancel: widget.onTap != null ? _onTapCancel : null,
+        onLongPressCancel:
+            widget.onLongPress != null ? _onLongPressCancel : null,
+        onLongPress: widget.onLongPress != null ? _onLongPress : null,
+        onLongPressStart: widget.onLongPress != null ? _onLongPressStart : null,
+        onLongPressEnd: widget.onLongPress != null ? _onLongPressEnd : null,
+        onPanDown: widget.onPanDown != null ? _onPanDown : null,
+        onPanStart: widget.onPanStart != null ? _onPanStart : null,
+        onPanUpdate: widget.onPanUpdate != null ? _onPanUpdate : null,
+        onPanEnd: widget.onPanEnd != null ? _onPanEnd : null,
+        onPanCancel: widget.onPanCancel != null ? _onPanCancel : null,
+        behavior: widget.hitTestBehavior,
+        excludeFromSemantics: widget.excludeFromSemantics,
+        child: widget.child,
+      ),
     );
   }
 }

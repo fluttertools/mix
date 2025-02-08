@@ -1,14 +1,15 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
-import 'on_platform_util.dart';
 
 import '../../theme/tokens/breakpoints_token.dart';
+import '../widget_event.dart';
 import '../widget_state_variant.dart';
 import 'on_breakpoint_util.dart';
 import 'on_brightness_util.dart';
 import 'on_directionality_util.dart';
 import 'on_not_util.dart';
 import 'on_orientation_util.dart';
+import 'on_platform_util.dart';
 
 class OnContextVariantUtility {
   // Platform variants
@@ -51,6 +52,9 @@ class OnContextVariantUtility {
   final unselected = const OnNotVariant(OnSelectedVariant());
   final dragged = const OnDraggedVariant();
   final error = const OnErrorVariant();
+
+  // Event variants
+  final tap = const OnTapEventVariant();
 
   /// Creates an [OnNotVariant] with the specified [variant].
   ///

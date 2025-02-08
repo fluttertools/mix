@@ -20,8 +20,8 @@ void main() {
       await tester.pumpWidget(Column(
         children: [
           Pressable(
-            onPress: null,
             enabled: false,
+            onPress: null,
             child: Container(key: firstKey),
           ),
           Pressable(
@@ -31,8 +31,8 @@ void main() {
           ),
           // Test with a onpress function
           Pressable(
-            onPress: () {},
             enabled: true,
+            onPress: () {},
             child: Container(key: thirdKey),
           ),
         ],
@@ -48,19 +48,37 @@ void main() {
       final secondNotifier = MixWidgetStateModel.of(secondContext);
       final thirdNotifier = MixWidgetStateModel.of(thirdContext);
 
-      expect(onEnabledAttr.variant.when(firstContext), false,
-          reason: 'First Pressable should be disabled');
-      expect(firstNotifier!.disabled, true,
-          reason: 'First Pressable should have disabled state');
-      expect(onEnabledAttr.variant.when(secondContext), false,
-          reason: 'Second Pressable should be disabled');
-      expect(secondNotifier!.disabled, true,
-          reason: 'Second Pressable should have disabled state');
+      expect(
+        onEnabledAttr.variant.when(firstContext),
+        false,
+        reason: 'First Pressable should be disabled',
+      );
+      expect(
+        firstNotifier!.disabled,
+        true,
+        reason: 'First Pressable should have disabled state',
+      );
+      expect(
+        onEnabledAttr.variant.when(secondContext),
+        false,
+        reason: 'Second Pressable should be disabled',
+      );
+      expect(
+        secondNotifier!.disabled,
+        true,
+        reason: 'Second Pressable should have disabled state',
+      );
 
-      expect(onEnabledAttr.variant.when(thirdContext), true,
-          reason: 'Third Pressable should be enabled');
-      expect(thirdNotifier!.disabled, false,
-          reason: 'Third Pressable should not have disabled state');
+      expect(
+        onEnabledAttr.variant.when(thirdContext),
+        true,
+        reason: 'Third Pressable should be enabled',
+      );
+      expect(
+        thirdNotifier!.disabled,
+        false,
+        reason: 'Third Pressable should not have disabled state',
+      );
     });
 
     testWidgets('is disposing the controller correcly', (widgetTester) async {
@@ -117,29 +135,31 @@ void main() {
       },
     );
 
-    testWidgets('Pressable responds to keyboard events',
-        (WidgetTester tester) async {
-      var wasPressed = false;
+    testWidgets(
+      'Pressable responds to keyboard events',
+      (WidgetTester tester) async {
+        var wasPressed = false;
 
-      await tester.pumpWidget(
-        MaterialApp(
-          home: Scaffold(
-            body: Pressable(
-              autofocus: true,
-              unpressDelay: Duration.zero,
-              onPress: () {
-                wasPressed = true;
-              },
-              child: const Text('Tap me'),
+        await tester.pumpWidget(
+          MaterialApp(
+            home: Scaffold(
+              body: Pressable(
+                onPress: () {
+                  wasPressed = true;
+                },
+                autofocus: true,
+                unpressDelay: Duration.zero,
+                child: const Text('Tap me'),
+              ),
             ),
           ),
-        ),
-      );
+        );
 
-      await tester.sendKeyEvent(LogicalKeyboardKey.enter);
+        await tester.sendKeyEvent(LogicalKeyboardKey.enter);
 
-      expect(wasPressed, isTrue);
-    });
+        expect(wasPressed, isTrue);
+      },
+    );
 
     testWidgets(
       'should propagate the onTap when it doesn\'t receive null',
@@ -151,9 +171,7 @@ void main() {
             onTap: () {
               onTapCalled = true;
             },
-            child: const Pressable(
-              child: Box(),
-            ),
+            child: const Pressable(child: Box()),
           ),
         );
 
@@ -163,31 +181,31 @@ void main() {
       },
     );
 
-    testWidgets('GestureDetector as parent should not affected by Pressable',
-        (tester) async {
-      bool onTapCalled = false;
+    testWidgets(
+      'GestureDetector as parent should not affected by Pressable',
+      (tester) async {
+        bool onTapCalled = false;
 
-      await tester.pumpWidget(
-        GestureDetector(
-          onTap: () {
-            onTapCalled = true;
-          },
-          child: PressableBox(
-            style: Style(
-              $box.color.red(),
-              $on.hover(
-                $box.color.blue(),
+        await tester.pumpWidget(
+          GestureDetector(
+            onTap: () {
+              onTapCalled = true;
+            },
+            child: PressableBox(
+              style: Style(
+                $box.color.red(),
+                $on.hover($box.color.blue()),
               ),
+              child: const Box(),
             ),
-            child: const Box(),
           ),
-        ),
-      );
-      expect(find.byType(Pressable), findsOneWidget);
-      await tester.tap(find.byType(GestureDetector).first);
+        );
+        expect(find.byType(Pressable), findsOneWidget);
+        await tester.tap(find.byType(GestureDetector).first);
 
-      expect(onTapCalled, isTrue);
-    });
+        expect(onTapCalled, isTrue);
+      },
+    );
   });
 
   testWidgets('Pressable cancel timer on dispose', (WidgetTester tester) async {
@@ -197,11 +215,11 @@ void main() {
       MaterialApp(
         home: Scaffold(
           body: Pressable(
-            autofocus: true,
-            unpressDelay: const Duration(minutes: 1),
             onPress: () {
               wasPressed = !wasPressed;
             },
+            autofocus: true,
+            unpressDelay: const Duration(minutes: 1),
             child: const Text('Tap me'),
           ),
         ),
@@ -268,42 +286,40 @@ void main() {
       },
     );
 
-    testWidgets('PressableBox responds to keyboard events',
-        (WidgetTester tester) async {
-      var wasPressed = false;
+    testWidgets(
+      'PressableBox responds to keyboard events',
+      (WidgetTester tester) async {
+        var wasPressed = false;
 
-      await tester.pumpWidget(
-        MaterialApp(
-          home: Scaffold(
-            body: PressableBox(
-              autofocus: true,
-              unpressDelay: Duration.zero,
-              onPress: () {
-                wasPressed = true;
-              },
-              child: const Text('Tap me'),
+        await tester.pumpWidget(
+          MaterialApp(
+            home: Scaffold(
+              body: PressableBox(
+                autofocus: true,
+                unpressDelay: Duration.zero,
+                onPress: () {
+                  wasPressed = true;
+                },
+                child: const Text('Tap me'),
+              ),
             ),
           ),
-        ),
-      );
+        );
 
-      await tester.sendKeyEvent(LogicalKeyboardKey.enter);
+        await tester.sendKeyEvent(LogicalKeyboardKey.enter);
 
-      expect(wasPressed, isTrue);
-    });
+        expect(wasPressed, isTrue);
+      },
+    );
 
     testWidgets('animates correctly on hover', (WidgetTester tester) async {
       await tester.pumpMaterialApp(
         PressableBox(
-          unpressDelay: const Duration(milliseconds: 200),
           style: Style(
             $with.opacity(1.0),
-            $on.hover(
-              $with.opacity(0.0),
-            ),
-          ).animate(
-            duration: const Duration(milliseconds: 200),
-          ),
+            $on.hover($with.opacity(0.0)),
+          ).animate(duration: const Duration(milliseconds: 200)),
+          unpressDelay: const Duration(milliseconds: 200),
           child: const Box(),
         ),
       );
@@ -321,208 +337,223 @@ void main() {
       expect(opacityWidget.opacity, 0.5);
     });
 
-    testWidgets(r'must change to attributes in $on.hover variant when hovered',
-        (WidgetTester tester) async {
-      await pumpTestCase(
-        tester: tester,
-        condition: $on.hover,
-        action: () => tester.hoverAndSettle(find.byType(PressableBox)),
-      );
-    });
+    testWidgets(
+      r'must change to attributes in $on.hover variant when hovered',
+      (WidgetTester tester) async {
+        await pumpTestCase(
+          tester: tester,
+          condition: $on.hover,
+          action: () => tester.hoverAndSettle(find.byType(PressableBox)),
+        );
+      },
+    );
 
     testWidgets(
-        r'must change to attributes inside $on.longPress variant when long pressed',
-        (WidgetTester tester) async {
-      await pumpTestCase(
-        tester: tester,
-        condition: $on.longPress,
-        action: () => tester.longPress(find.byType(PressableBox)),
-      );
-    });
-
-    testWidgets(r'must restyle using attributes inside $on.press when pressed',
-        (WidgetTester tester) async {
-      await pumpTestCase(
-        tester: tester,
-        duration: const Duration(milliseconds: 250),
-        condition: $on.press,
-        action: () async {
-          await tester.tap(find.byType(PressableBox));
-          await tester.pump();
-        },
-      );
-    });
+      r'must change to attributes inside $on.longPress variant when long pressed',
+      (WidgetTester tester) async {
+        await pumpTestCase(
+          tester: tester,
+          condition: $on.longPress,
+          action: () => tester.longPress(find.byType(PressableBox)),
+        );
+      },
+    );
 
     testWidgets(
-        r'must restyle using attributes inside ($on.longPress | $on.hover) when hovered',
-        (WidgetTester tester) async {
-      await pumpTestCase(
-        tester: tester,
-        condition: ($on.longPress | $on.hover),
-        action: () => tester.hoverAndSettle(find.byType(PressableBox)),
-      );
-    });
+      r'must restyle using attributes inside $on.press when pressed',
+      (WidgetTester tester) async {
+        await pumpTestCase(
+          tester: tester,
+          duration: const Duration(milliseconds: 250),
+          condition: $on.press,
+          action: () async {
+            await tester.tap(find.byType(PressableBox));
+            await tester.pump();
+          },
+        );
+      },
+    );
 
     testWidgets(
-        r'must restyle using attributes inside ($on.longPress | $on.hover) when long pressed',
-        (WidgetTester tester) async {
-      await pumpTestCase(
-        tester: tester,
-        condition: ($on.longPress | $on.hover),
-        action: () => tester.longPress(find.byType(PressableBox)),
-      );
-    });
+      r'must restyle using attributes inside ($on.longPress | $on.hover) when hovered',
+      (WidgetTester tester) async {
+        await pumpTestCase(
+          tester: tester,
+          condition: ($on.longPress | $on.hover),
+          action: () => tester.hoverAndSettle(find.byType(PressableBox)),
+        );
+      },
+    );
 
     testWidgets(
-        r'must NOT restyle using attributes inside ($on.longPress | $on.hover) when Pressed',
-        (WidgetTester tester) async {
-      await pumpTestCase(
-        tester: tester,
-        duration: const Duration(milliseconds: 250),
-        condition: ($on.longPress | $on.hover),
-        action: () async {
-          await tester.tap(find.byType(PressableBox));
-          await tester.pump();
-        },
-        finalExpectedOpacity: 0.5,
-      );
-    });
+      r'must restyle using attributes inside ($on.longPress | $on.hover) when long pressed',
+      (WidgetTester tester) async {
+        await pumpTestCase(
+          tester: tester,
+          condition: ($on.longPress | $on.hover),
+          action: () => tester.longPress(find.byType(PressableBox)),
+        );
+      },
+    );
 
     testWidgets(
-        r'must restyle using attributes inside ($on.hover | $on.press) when pressed',
-        (WidgetTester tester) async {
-      await pumpTestCase(
-        tester: tester,
-        duration: const Duration(milliseconds: 250),
-        condition: ($on.hover | $on.press),
-        action: () async {
-          await tester.tap(find.byType(PressableBox));
-          await tester.pump();
-        },
-      );
-    });
+      r'must NOT restyle using attributes inside ($on.longPress | $on.hover) when Pressed',
+      (WidgetTester tester) async {
+        await pumpTestCase(
+          tester: tester,
+          duration: const Duration(milliseconds: 250),
+          condition: ($on.longPress | $on.hover),
+          action: () async {
+            await tester.tap(find.byType(PressableBox));
+            await tester.pump();
+          },
+          finalExpectedOpacity: 0.5,
+        );
+      },
+    );
 
     testWidgets(
-        r'must restyle using attributes inside ($on.hover | $on.press | $on.longPress) when pressed',
-        (WidgetTester tester) async {
-      await pumpTestCase(
-        tester: tester,
-        duration: const Duration(milliseconds: 250),
-        condition: ($on.press | $on.hover | $on.longPress),
-        action: () async {
-          await tester.tap(find.byType(PressableBox));
-          await tester.pump();
-        },
-      );
-    });
+      r'must restyle using attributes inside ($on.hover | $on.press) when pressed',
+      (WidgetTester tester) async {
+        await pumpTestCase(
+          tester: tester,
+          duration: const Duration(milliseconds: 250),
+          condition: ($on.hover | $on.press),
+          action: () async {
+            await tester.tap(find.byType(PressableBox));
+            await tester.pump();
+          },
+        );
+      },
+    );
 
     testWidgets(
-        r'must restyle using attributes inside ($on.hover | $on.press) when hovered',
-        (WidgetTester tester) async {
-      await pumpTestCase(
-        tester: tester,
-        duration: const Duration(milliseconds: 250),
-        condition: ($on.hover | $on.press),
-        action: () async {
-          await tester.hoverAndSettle(find.byType(PressableBox));
-        },
-      );
-    });
+      r'must restyle using attributes inside ($on.hover | $on.press | $on.longPress) when pressed',
+      (WidgetTester tester) async {
+        await pumpTestCase(
+          tester: tester,
+          duration: const Duration(milliseconds: 250),
+          condition: ($on.press | $on.hover | $on.longPress),
+          action: () async {
+            await tester.tap(find.byType(PressableBox));
+            await tester.pump();
+          },
+        );
+      },
+    );
 
     testWidgets(
-        r'must NOT restyle using attributes inside ($on.hover | $on.press) when long pressed',
-        (WidgetTester tester) async {
-      await pumpTestCase(
-        tester: tester,
-        duration: const Duration(milliseconds: 250),
-        condition: ($on.hover | $on.press),
-        action: () async {
-          await tester.longPress(find.byType(PressableBox));
-        },
-        finalExpectedOpacity: 0.5,
-      );
-    });
+      r'must restyle using attributes inside ($on.hover | $on.press) when hovered',
+      (WidgetTester tester) async {
+        await pumpTestCase(
+          tester: tester,
+          duration: const Duration(milliseconds: 250),
+          condition: ($on.hover | $on.press),
+          action: () async {
+            await tester.hoverAndSettle(find.byType(PressableBox));
+          },
+        );
+      },
+    );
 
     testWidgets(
-        r'must restyle using attributes inside ($on.longPress | $on.press) when pressed',
-        (WidgetTester tester) async {
-      await pumpTestCase(
-        tester: tester,
-        duration: const Duration(milliseconds: 250),
-        condition: ($on.longPress | $on.press),
-        action: () async {
-          await tester.tap(find.byType(PressableBox));
-          await tester.pump();
-        },
-      );
-    });
+      r'must restyle using attributes inside ($on.hover | $on.press) when long pressed',
+      (WidgetTester tester) async {
+        await pumpTestCase(
+          tester: tester,
+          duration: const Duration(milliseconds: 250),
+          condition: ($on.hover | $on.press),
+          action: () async {
+            await tester.longPress(find.byType(PressableBox));
+          },
+          finalExpectedOpacity: 1,
+        );
+      },
+    );
 
     testWidgets(
-        r'must restyle using attributes inside ($on.longPress | $on.press) when long pressed',
-        (WidgetTester tester) async {
-      await pumpTestCase(
-        tester: tester,
-        condition: ($on.longPress | $on.press),
-        action: () async {
-          await tester.longPress(find.byType(PressableBox));
-        },
-      );
-    });
+      r'must restyle using attributes inside ($on.longPress | $on.press) when pressed',
+      (WidgetTester tester) async {
+        await pumpTestCase(
+          tester: tester,
+          duration: const Duration(milliseconds: 250),
+          condition: ($on.longPress | $on.press),
+          action: () async {
+            await tester.tap(find.byType(PressableBox));
+            await tester.pump();
+          },
+        );
+      },
+    );
 
     testWidgets(
-        r'must NOT restyle using attributes inside ($on.longPress | $on.press) when hovered',
-        (WidgetTester tester) async {
-      await pumpTestCase(
-        tester: tester,
-        condition: ($on.longPress | $on.press),
-        action: () async {
-          await tester.hoverAndSettle(find.byType(PressableBox));
-        },
-        finalExpectedOpacity: 0.5,
-      );
-    });
+      r'must restyle using attributes inside ($on.longPress | $on.press) when long pressed',
+      (WidgetTester tester) async {
+        await pumpTestCase(
+          tester: tester,
+          condition: ($on.longPress | $on.press),
+          action: () async {
+            await tester.longPress(find.byType(PressableBox));
+          },
+        );
+      },
+    );
 
     testWidgets(
-        r'must restyle using attributes inside ($on.hover & $on.press) when hovered & pressed',
-        (WidgetTester tester) async {
-      await pumpTestCase(
-        tester: tester,
-        duration: const Duration(milliseconds: 250),
-        condition: ($on.hover & $on.press),
-        action: () async {
-          await tester.hoverAndSettle(find.byType(PressableBox));
-          await tester.pump();
-          await tester.tap(find.byType(PressableBox));
-          await tester.pump();
-        },
-      );
-    });
+      r'must NOT restyle using attributes inside ($on.longPress | $on.press) when hovered',
+      (WidgetTester tester) async {
+        await pumpTestCase(
+          tester: tester,
+          condition: ($on.longPress | $on.press),
+          action: () async {
+            await tester.hoverAndSettle(find.byType(PressableBox));
+          },
+          finalExpectedOpacity: 0.5,
+        );
+      },
+    );
 
     testWidgets(
-        r'must restyle using attributes inside ($on.hover & onLongPress) when hovered & longPressed',
-        (WidgetTester tester) async {
-      await pumpTestCase(
-        tester: tester,
-        condition: ($on.hover & $on.longPress),
-        action: () async {
-          await tester.hoverAndSettle(find.byType(PressableBox));
-          await tester.pump();
+      r'must restyle using attributes inside ($on.hover & $on.press) when hovered & pressed',
+      (WidgetTester tester) async {
+        await pumpTestCase(
+          tester: tester,
+          duration: const Duration(milliseconds: 250),
+          condition: ($on.hover & $on.press),
+          action: () async {
+            await tester.hoverAndSettle(find.byType(PressableBox));
+            await tester.pump();
+            await tester.tap(find.byType(PressableBox));
+            await tester.pump();
+          },
+        );
+      },
+    );
 
-          // Custom way to long press
-          final gesture = await tester.createGesture();
-          await gesture.addPointer(
-            location: tester.getCenter(find.byType(PressableBox)),
-          );
+    testWidgets(
+      r'must restyle using attributes inside ($on.hover & onLongPress) when hovered & longPressed',
+      (WidgetTester tester) async {
+        await pumpTestCase(
+          tester: tester,
+          condition: ($on.hover & $on.longPress),
+          action: () async {
+            await tester.hoverAndSettle(find.byType(PressableBox));
+            await tester.pump();
 
-          await gesture.down(
-            tester.getCenter(find.byType(PressableBox)),
-          );
-          addTearDown(gesture.removePointer);
+            // Custom way to long press
+            final gesture = await tester.createGesture();
+            await gesture.addPointer(
+              location: tester.getCenter(find.byType(PressableBox)),
+            );
 
-          await tester.pump(kLongPressTimeout);
-        },
-      );
-    });
+            await gesture.down(tester.getCenter(find.byType(PressableBox)));
+            addTearDown(gesture.removePointer);
+
+            await tester.pump(kLongPressTimeout);
+          },
+        );
+      },
+    );
 
     testWidgets(
       'should propagate the onTap when it doesn\'t receive null',
@@ -534,9 +565,7 @@ void main() {
             onTap: () {
               onTapCalled = true;
             },
-            child: const PressableBox(
-              child: Box(),
-            ),
+            child: const PressableBox(child: Box()),
           ),
         );
 
@@ -548,97 +577,98 @@ void main() {
   });
 
   group('Mouse Cursor tests', () {
-    testWidgets('uses custom mouseCursor when provided',
-        (WidgetTester tester) async {
-      await tester.pumpWidget(
-        const Pressable(
-          mouseCursor: SystemMouseCursors.help,
-          child: SizedBox(),
-        ),
-      );
+    testWidgets(
+      'uses custom mouseCursor when provided',
+      (WidgetTester tester) async {
+        await tester.pumpWidget(
+          const Pressable(
+            mouseCursor: SystemMouseCursors.help,
+            child: SizedBox(),
+          ),
+        );
 
-      final finder = find.byType(Pressable);
-      expect(finder, findsOneWidget);
+        final finder = find.byType(Pressable);
+        expect(finder, findsOneWidget);
 
-      final pressableState = tester.state<PressableWidgetState>(finder);
-      expect(pressableState.mouseCursor, equals(SystemMouseCursors.help));
-    });
+        final pressableState = tester.state<PressableWidgetState>(finder);
+        expect(pressableState.mouseCursor, equals(SystemMouseCursors.help));
+      },
+    );
 
-    testWidgets('uses forbidden mouseCursor when disabled',
-        (WidgetTester tester) async {
-      await tester.pumpWidget(
-        const Pressable(
-          enabled: false,
-          child: SizedBox(),
-        ),
-      );
+    testWidgets(
+      'uses forbidden mouseCursor when disabled',
+      (WidgetTester tester) async {
+        await tester.pumpWidget(
+          const Pressable(enabled: false, child: SizedBox()),
+        );
 
-      final finder = find.byType(Pressable);
-      expect(finder, findsOneWidget);
+        final finder = find.byType(Pressable);
+        expect(finder, findsOneWidget);
 
-      final pressableState = tester.state<PressableWidgetState>(finder);
-      expect(pressableState.mouseCursor, equals(SystemMouseCursors.forbidden));
-    });
+        final pressableState = tester.state<PressableWidgetState>(finder);
+        expect(
+            pressableState.mouseCursor, equals(SystemMouseCursors.forbidden));
+      },
+    );
 
-    testWidgets('uses click mouseCursor when enabled and onPress provided',
-        (WidgetTester tester) async {
-      await tester.pumpWidget(
-        Pressable(
-          onPress: () {},
-          child: const SizedBox(),
-        ),
-      );
+    testWidgets(
+      'uses click mouseCursor when enabled and onPress provided',
+      (WidgetTester tester) async {
+        await tester.pumpWidget(
+          Pressable(onPress: () {}, child: const SizedBox()),
+        );
 
-      final finder = find.byType(Pressable);
-      expect(finder, findsOneWidget);
+        final finder = find.byType(Pressable);
+        expect(finder, findsOneWidget);
 
-      final pressableState = tester.state<PressableWidgetState>(finder);
-      expect(pressableState.mouseCursor, equals(SystemMouseCursors.click));
-    });
+        final pressableState = tester.state<PressableWidgetState>(finder);
+        expect(pressableState.mouseCursor, equals(SystemMouseCursors.click));
+      },
+    );
 
-    testWidgets('defers mouseCursor when enabled and onPress not provided',
-        (WidgetTester tester) async {
-      await tester.pumpWidget(
-        const Pressable(
-          child: SizedBox(),
-        ),
-      );
+    testWidgets(
+      'defers mouseCursor when enabled and onPress not provided',
+      (WidgetTester tester) async {
+        await tester.pumpWidget(
+          const Pressable(child: SizedBox()),
+        );
 
-      final finder = find.byType(Pressable);
-      expect(finder, findsOneWidget);
+        final finder = find.byType(Pressable);
+        expect(finder, findsOneWidget);
 
-      final pressableState = tester.state<PressableWidgetState>(finder);
-      expect(pressableState.mouseCursor, equals(MouseCursor.defer));
-    });
+        final pressableState = tester.state<PressableWidgetState>(finder);
+        expect(pressableState.mouseCursor, equals(MouseCursor.defer));
+      },
+    );
   });
 
   group('Interactable', () {
-    testWidgets('GestureDetector as parent should not affected by Interactable',
-        (tester) async {
-      bool onTapCalled = false;
+    testWidgets(
+      'GestureDetector as parent should not affected by Interactable',
+      (tester) async {
+        bool onTapCalled = false;
 
-      await tester.pumpWidget(
-        GestureDetector(
-          onTap: () {
-            onTapCalled = true;
-          },
-          child: Box(
-            style: Style(
-              $box.color.red(),
-              $on.hover(
-                $box.color.blue(),
+        await tester.pumpWidget(
+          GestureDetector(
+            onTap: () {
+              onTapCalled = true;
+            },
+            child: Box(
+              style: Style(
+                $box.color.red(),
+                $on.hover($box.color.blue()),
               ),
             ),
           ),
-        ),
-      );
+        );
 
-      expect(find.byType(Interactable), findsOneWidget);
+        expect(find.byType(Interactable), findsOneWidget);
 
-      await tester.tap(find.byType(GestureDetector));
+        await tester.tap(find.byType(GestureDetector));
 
-      expect(onTapCalled, isTrue);
-    });
+        expect(onTapCalled, isTrue);
+      },
+    );
   });
 }
 
@@ -671,18 +701,16 @@ Future<void> pumpTestCase({
 }) async {
   await tester.pumpWidget(
     PressableBox(
-      unpressDelay: duration,
-      onPress: () {},
-      onLongPress: () {},
-      enabled: true,
       style: Style(
         $with.opacity(0.5),
         $box.height(50),
         $box.width(50),
-        condition(
-          $with.opacity(1),
-        ),
+        condition($with.opacity(1)),
       ),
+      onLongPress: () {},
+      unpressDelay: duration,
+      onPress: () {},
+      enabled: true,
       child: const SizedBox(),
     ),
   );
@@ -726,9 +754,6 @@ class _DisposalPressableState extends State<_DisposalPressable> {
 
   @override
   Widget build(BuildContext context) {
-    return Pressable(
-      controller: _controller,
-      child: const Box(),
-    );
+    return Pressable(controller: _controller, child: const Box());
   }
 }
