@@ -4,6 +4,7 @@ import 'package:analyzer/error/error.dart' hide LintCode;
 import 'package:analyzer/error/listener.dart';
 import 'package:analyzer/source/source_range.dart';
 import 'package:custom_lint_builder/custom_lint_builder.dart';
+
 import '../utils/type_checker.dart';
 
 const _whiteList = ['Style.asAttribute'];
@@ -33,7 +34,7 @@ class AttributesOrdering extends DartLintRule {
       final arguments = node.argumentList.arguments;
 
       if (_hasAnyAttributeOutOfOrder(arguments)) {
-        reporter.reportErrorForNode(_code, node);
+        reporter.atNode(node, _code);
       }
     });
 
@@ -43,7 +44,7 @@ class AttributesOrdering extends DartLintRule {
         final arguments = expression.argumentList.arguments;
 
         if (_hasAnyAttributeOutOfOrder(arguments)) {
-          reporter.reportErrorForNode(_code, expression);
+          reporter.atNode(expression, _code);
         }
       }
 

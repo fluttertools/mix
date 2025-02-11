@@ -25,11 +25,7 @@ class AvoidEmptyVariants extends DartLintRule {
       if (!variantAttributeChecker.isAssignableFromType(type)) return;
 
       if (expression.argumentList.arguments.isEmpty) {
-        reporter.reportErrorForOffset(
-          _code,
-          expression.offset,
-          expression.length,
-        );
+        reporter.atNode(expression, _code);
       }
     });
   }

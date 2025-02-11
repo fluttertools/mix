@@ -9,17 +9,15 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  mix: 
+  mix:
     path: ../mix
   mix_lint:
     path: ../mix_lint
 
-
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  custom_lint: ^0.6.4
-  analyzer: ^6.0.0
-  analyzer_plugin: ^0.11.2
-  test: ^1.24.9
-
+  custom_lint: ^0.7.1
+  # analyzer: ^6.0.0
+  # analyzer_plugin: ^0.11.2
+  # test: ^1.24.9

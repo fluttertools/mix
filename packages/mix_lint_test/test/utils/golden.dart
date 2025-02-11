@@ -28,8 +28,8 @@ import 'package:analyzer/dart/analysis/results.dart';
 import 'package:analyzer/dart/analysis/utilities.dart';
 import 'package:analyzer_plugin/protocol/protocol_generated.dart';
 import 'package:custom_lint_core/custom_lint_core.dart';
+import 'package:flutter_test/flutter_test.dart';
 import 'package:path/path.dart';
-import 'package:test/test.dart';
 
 @Deprecated('Do not commit')
 bool goldenWrite = false;
