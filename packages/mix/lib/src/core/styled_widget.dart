@@ -140,7 +140,14 @@ class SpecBuilder extends StatelessWidget {
         _hasWidgetStateVariant && MixWidgetState.of(context) == null;
 
     if (needsWidgetState || controller != null) {
-      current = Interactable(controller: controller, child: current);
+      final canRequestFocus =
+          style.variants.values.any((attr) => attr.variant is OnFocusedVariant);
+
+      current = Interactable(
+        controller: controller,
+        canRequestFocus: canRequestFocus,
+        child: current,
+      );
     }
 
     // Otherwise, directly build the mixed child widget

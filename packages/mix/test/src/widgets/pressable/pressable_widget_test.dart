@@ -63,6 +63,32 @@ void main() {
           reason: 'Third Pressable should not have disabled state');
     });
 
+    testWidgets('should not be focusable when canRequestFocus is false',
+        (tester) async {
+      await _testFocusability(
+        tester,
+        builder: (focusNode, child) => Pressable(
+          canRequestFocus: false,
+          focusNode: focusNode,
+          child: child,
+        ),
+        expectedHasFocus: false,
+      );
+    });
+
+    testWidgets('should be focusable when canRequestFocus is true',
+        (tester) async {
+      await _testFocusability(
+        tester,
+        builder: (focusNode, child) => Pressable(
+          canRequestFocus: true,
+          focusNode: focusNode,
+          child: child,
+        ),
+        expectedHasFocus: true,
+      );
+    });
+
     testWidgets('is disposing the controller correcly', (widgetTester) async {
       await widgetTester.pumpWidget(const _DisposalPressable());
     });
@@ -639,6 +665,32 @@ void main() {
 
       expect(onTapCalled, isTrue);
     });
+
+    testWidgets('should be focusable when canRequestFocus is true',
+        (tester) async {
+      await _testFocusability(
+        tester,
+        builder: (focusNode, child) => Interactable(
+          canRequestFocus: true,
+          focusNode: focusNode,
+          child: child,
+        ),
+        expectedHasFocus: true,
+      );
+    });
+
+    testWidgets('should not be focusable when canRequestFocus is false',
+        (tester) async {
+      await _testFocusability(
+        tester,
+        builder: (focusNode, child) => Interactable(
+          canRequestFocus: false,
+          focusNode: focusNode,
+          child: child,
+        ),
+        expectedHasFocus: false,
+      );
+    });
   });
 }
 
@@ -731,4 +783,24 @@ class _DisposalPressableState extends State<_DisposalPressable> {
       child: const Box(),
     );
   }
+}
+
+Future<void> _testFocusability(
+  WidgetTester tester, {
+  required bool expectedHasFocus,
+  required Widget Function(FocusNode focusNode, Widget child) builder,
+}) async {
+  final focusNode = FocusNode();
+  await tester.pumpWidget(
+    builder(
+      focusNode,
+      Container(),
+    ),
+  );
+
+  focusNode.requestFocus();
+  await tester.pump();
+
+  expect(find.byType(FocusableActionDetector), findsOneWidget);
+  expect(focusNode.hasFocus, expectedHasFocus);
 }
